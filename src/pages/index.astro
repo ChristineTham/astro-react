@@ -1,14 +1,17 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import { SiteConfig } from '../siteconfig'
+import Page from '../layouts/Page.astro'
 import { getCollection } from 'astro:content'
 const blogEntries = await getCollection('blog')
+import Test from '../components/test'
 ---
 
-<Layout title="Welcome to Astro Base">
+<Page title={SiteConfig.title}>
   <main class="font-sans prose">
     <div class="i-logos-astro h-24 w-48"></div>
-    <h1>Welcome to Astro Base</h1>
-    <p>This is a minimal Astro starter with Typescript, UnoCSS and Iconify.</p>
+    <h1>{SiteConfig.title}</h1>
+    <p>{SiteConfig.description}</p>
+    <Test client-only="react"/>
     <ul>
       {
         blogEntries.map((blogPostEntry) => (
@@ -26,4 +29,4 @@ const blogEntries = await getCollection('blog')
       }
     </ul>
   </main>
-</Layout>
+</Page>
